@@ -1,37 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
 import './App.css'
-import app from './firebaseConfig'
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+// import app from './firebaseConfig'
+// import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-const auth = getAuth(app);
+import ProductsList from './ProductsList';
+// const auth = getAuth(app);
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [user, setUser] = useState(null);
 
-  const handleLogin = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      setUser(userCredential.user);
-    } catch (error) {
-      console.error("Error signing in:", error);
-    }
-  };
+  // const handleLogin = async () => {
+  //   try {
+  //     const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  //     setUser(userCredential.user);
+  //   } catch (error) {
+  //     console.error("Error signing in:", error);
+  //   }
+  // };
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    setUser(null);
-  };
+  // const handleLogout = async () => {
+  //   await signOut(auth);
+  //   setUser(null);
+  // };
 
   return (
     <div>
       <h1>Firebase Auth with Vite and React</h1>
-      {user ? (<div>
+      <ProductsList />
+      {/* {user ? (<div>
         <p>Welcome, {user.email}</p>
         <button onClick={handleLogout}>Logout</button>
+
+
       </div>) : (<div>
         <input
           type="email"
@@ -46,7 +48,7 @@ function App() {
           placeholder="Password"
         />
         <button onClick={handleLogin}>Login</button>
-      </div>)}
+      </div>)}*/}
     </div>)
 }
 

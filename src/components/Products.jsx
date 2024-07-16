@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
-import app from '../firebaseConfig'
 import { Link } from "react-router-dom";
+import app from '../firebaseConfig'
 
 const db = getFirestore(app);
 

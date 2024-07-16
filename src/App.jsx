@@ -3,12 +3,13 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom';
 
 import Home from './components/Home';
-import About from './components/About';
+import About from './components/Login';
 import Contact from './components/Contact';
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import Header from './components/Header';
 import CreateProduct from './components/CreateProduct';
+import Login from './components/Login';
 
 // import app from './firebaseConfig'
 // import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
@@ -44,11 +45,14 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/create-product" element={<CreateProduct />} />
+                <Route path="/login" element={<Login />} /> 
                 <Route path="/products/:id" element={<ProductDetail />} />
             </Routes>
             {/*       
       <h1>Firebase Auth with Vite and React</h1>
       <ProductsList /> */}
+            
+
             {/* {user ? (<div>
         <p>Welcome, {user.email}</p>
         <button onClick={handleLogout}>Logout</button>

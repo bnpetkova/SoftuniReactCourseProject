@@ -1,12 +1,11 @@
-// src/ProductsList.jsx
-
 import { useEffect, useState } from "react";
 import { collection, getDocs, getFirestore } from "@firebase/firestore";
-import app from './firebaseConfig'
+import app from '../firebaseConfig'
+import { Link } from "react-router-dom";
 
 const db = getFirestore(app);
 
-function ProductsList() {
+function Products() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -25,7 +24,7 @@ function ProductsList() {
 
     return (
         <div>
-            <h2>Products</h2>
+            <h2>Products <Link to="/create-product">New</Link></h2>
             {products.map(product => (
                 <div key={product.id}>
                     <h3>{product.Name}</h3>
@@ -34,6 +33,6 @@ function ProductsList() {
             ))}
         </div>
     );
-}
 
-export default ProductsList;
+}
+export default Products;

@@ -27,7 +27,7 @@ function Products() {
             <h2>Products <Link to="/create-product">New</Link></h2>
             {products.map(product => (
                 <div key={product.id}>
-                    <h3>{product.Name}</h3>
+                    <h3><Link to={`/products/${product.id}`}>{product.Name}</Link></h3>
                     <p>{product.Description}</p>
                 </div>
             ))}

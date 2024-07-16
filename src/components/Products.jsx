@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, getFirestore } from "@firebase/firestore";
+import { collection, getDocs, getFirestore, addDoc } from "@firebase/firestore";
 import { Link } from "react-router-dom";
-import app from '../firebaseConfig'
+import app from '../firebaseConfig';
 
 const db = getFirestore(app);
 
@@ -22,6 +22,19 @@ function Products() {
         fetchProducts();
     }, []);
 
+    const addToWishlist = async (product) => {
+        try {
+            await addDoc(collection(db, "wishlist"), {
+                productId: product.id,
+                name: product.Name,
+                description: product.Description
+            });
+            alert("Product added to wishlist!");
+        } catch (error) {
+            console.error("Error adding to wishlist: ", error);
+        }
+    };
+
     return (
         <div>
             <h2>Products <Link to="/create-product">New</Link></h2>
@@ -29,6 +42,7 @@ function Products() {
                 <div key={product.id}>
                     <h3><Link to={`/products/${product.id}`}>{product.Name}</Link></h3>
                     <p>{product.Description}</p>
+                    <button onClick={() => addToWishlist(product)}>Add to Wishlist</button>
                 </div>
             ))}
         </div>

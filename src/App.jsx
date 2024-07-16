@@ -10,6 +10,7 @@ import ProductDetail from './components/ProductDetail';
 import Header from './components/Header';
 import CreateProduct from './components/CreateProduct';
 import Login from './components/Login';
+import Wishlist from './components/Wishlist';
 
 // import app from './firebaseConfig'
 // import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/products" element={<Products />} />
                 <Route path="/create-product" element={<CreateProduct />} />
                 <Route path="/login" element={<Login />} /> 
+                <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/products/:id" element={<ProductDetail />} />
             </Routes>
             {/*       

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +9,8 @@ const Login = () => {
   const [error, setError] = useState('');
   const [signingIn, setSigningIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const locationState = location.state || {}; // Default to an empty object if state is undefined
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <h2>Login</h2>
+      {locationState.message && <p className="error">{locationState.message}</p>}
       <form onSubmit={handleLogin}>
         <div>
           <label htmlFor="email">Email:</label>

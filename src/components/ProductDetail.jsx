@@ -1,8 +1,10 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-
 import { deleteDoc, doc, getDoc, getFirestore } from "@firebase/firestore";
 import app from '../firebaseConfig'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash, faSpinner } from '@fortawesome/free-solid-svg-icons';
+
 const db = getFirestore(app);
 
 
@@ -45,12 +47,16 @@ const ProductDetail = () => {
 
   return <>
     {product ? <>
-      <h2>Product ID: {product.id}</h2>
+      <h3>Product ID: {product.id} <Link to={`/products/edit/${product.id}`}>
+      <FontAwesomeIcon icon={faEdit} />Edit</Link></h3>
       <div>Name: {product.Name}</div>
-      <div>Description: {product.Description}
-      </div>
-      <div><button onClick={handleDelete}>Delete</button></div>
-    </> : <div>Loading...</div>}
+      <div>Description: {product.Description}</div>
+      <div>Price: {product.Price}</div>
+
+      <div><button onClick={handleDelete}>
+      <FontAwesomeIcon icon={faTrash} /> Delete</button></div>
+    </> : <div>
+    <FontAwesomeIcon icon={faSpinner} spin />Loading...</div>}
   </>;
 };
 

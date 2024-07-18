@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,33 +29,36 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
-      {locationState.message && <p className="error">{locationState.message}</p>}
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p className="error">{error}</p>}
-        <button type="submit" disabled={signingIn}>Login</button>
-      </form>
-    </div>
+    <h2>Login</h2>
+    {locationState.message && <p className="error">{locationState.message}</p>}
+    <form onSubmit={handleLogin}>
+      <div className="form-group">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          className="form-control"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          className="form-control"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      {error && <p className="error">{error}</p>}
+        <button type="submit" className="btn btn-primary" disabled={signingIn}>
+        <FontAwesomeIcon icon={faSignInAlt} />Login</button>
+    </form>
+  </div>
   );
 };
 

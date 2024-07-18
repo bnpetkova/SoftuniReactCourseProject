@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { db } from '../firebaseConfig'; // Import db from firebaseConfig
+import { db } from '../firebaseConfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 function Wishlist() {
     const [wishlist, setWishlist] = useState([]);
-    const [loading, setLoading] = useState(true); // To handle loading state
-    const [error, setError] = useState(null); // To handle errors
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -39,21 +41,22 @@ function Wishlist() {
     };
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <p className="loading">Loading...</p>;
     }
 
     if (error) {
-        return <p>{error}</p>;
+        return <p className="error">{error}</p>;
     }
 
     return (
-        <div>
+        <div className="wishlist-container">
             <h1>Wishlist</h1>
             <ul>
                 {wishlist.map(item => (
                     <li key={item.id}>
                         {item.name} - {item.description}
-                        <button onClick={() => handleRemove(item.id)}>Remove</button>
+                        <button onClick={() => handleRemove(item.id)} className="btn-remove">
+                        <FontAwesomeIcon icon={faTrashAlt}/>Remove</button>
                     </li>
                 ))}
             </ul>

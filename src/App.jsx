@@ -3,12 +3,10 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom';
 
 import Home from './components/Home';
-import About from './components/Login';
-import Contact from './components/Contact';
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import Header from './components/Header';
-import CreateProduct from './components/CreateProduct';
+import CreateEditProduct from './components/CreateEditProduct';
 import Login from './components/Login';
 import Wishlist from './components/Wishlist';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
@@ -20,13 +18,12 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/create-product" element={<AuthenticatedRoute component={CreateProduct} />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/products/new" element={<AuthenticatedRoute component={CreateEditProduct} />} />
+        <Route path="/products/edit/:id" element={<AuthenticatedRoute component={CreateEditProduct} />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </div>)
 }

@@ -3,7 +3,7 @@ import { useUser } from '../contexts/hooks';
 import { auth } from '../firebaseConfig';
 import { signOut } from '@firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSignInAlt, faBars, faEnvelope, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSignInAlt, faBars, faEnvelope, faHeart,faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
   const currentUser = useUser();
@@ -33,6 +33,10 @@ function Header() {
             {currentUser && <Link to="#" className="nav-link" onClick={handleLogout}>Logout</Link>}
             {!currentUser && <Link to="/login" className="nav-link">
               <FontAwesomeIcon icon={faSignInAlt} />Login</Link>}
+          </li>
+          <li className="nav-item">
+            <Link to="/register" className="nav-link">
+            <FontAwesomeIcon icon={faUserPlus} /> Register</Link>
           </li>
           <li className="nav-item">
             <Link to="/contact" className="nav-link">

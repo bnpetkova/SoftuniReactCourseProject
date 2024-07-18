@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../contexts/hooks';
 import { auth } from '../firebaseConfig';
 import { signOut } from '@firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faSignInAlt, faBars, faEnvelope, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
   const currentUser = useUser();
 
   const handleLogout = (e) => {
-    debugger;
+    
     e.preventDefault();
 
     signOut(auth)
@@ -16,24 +18,29 @@ function Header() {
   };
 
   return (
-    <header className="header">
-      <nav className="nav">
-        <ul className="nav-menu">
+    <header className="header-custom">
+      <nav className="container">
+        <ul className="nav-custom">
           <li className="nav-item">
-            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/" className="nav-link">
+            <FontAwesomeIcon icon={faHome} /> Home</Link>
           </li>
           <li className="nav-item">
-            <Link to="/products" className="nav-link">Products</Link>
+            <Link to="/products" className="nav-link">
+            <FontAwesomeIcon icon={faBars} />Products</Link>
           </li>
           <li className="nav-item">
             {currentUser && <Link to="#" className="nav-link" onClick={handleLogout}>Logout</Link>}
-            {!currentUser && <Link to="/login" className="nav-link">Login</Link>}
+            {!currentUser && <Link to="/login" className="nav-link">
+              <FontAwesomeIcon icon={faSignInAlt} />Login</Link>}
           </li>
           <li className="nav-item">
-            <Link to="/contact" className="nav-link">Contact</Link>
+            <Link to="/contact" className="nav-link">
+            <FontAwesomeIcon icon={faEnvelope} /> Contact</Link>
           </li>
           <li className="nav-item">
-            <Link to="/wishlist" className="nav-link">Wishlist</Link>
+            <Link to="/wishlist" className="nav-link">
+            <FontAwesomeIcon icon={faHeart} />Wishlist</Link>
           </li>
         </ul>
       </nav>

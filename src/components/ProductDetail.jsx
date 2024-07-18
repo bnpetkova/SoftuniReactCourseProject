@@ -16,47 +16,47 @@ const ProductDetail = () => {
   useEffect(() => {
     const singlefetchProduct = async () => {
 
-      setTimeout(() => {
+      try {
         const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef);
 
-        getDoc(docRef).then((docSnap) => {
-          if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-            setProduct({ id: id, ...docSnap.data() });
-          } else {
-            console.log("No such document!");
-          }
-        }).catch((error) => {
-          console.log("Error getting document:", error);
-        });
-      }, 100);
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          setProduct({ id: id, ...docSnap.data() });
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.log("Error getting document:", error);
+      }
     };
 
     singlefetchProduct();
   }, [id]);
 
-  function handleDelete() {
-    deleteDoc(doc(db, "products", id))
-      .then(() => {
-        console.log(`Deleted product: ${id}`);
-        navigate('/products');
-      })
-      .catch((error) => { console.log(`Error: ${error}`) });
-
+  async function handleDelete() {
+    try {
+      await deleteDoc(doc(db, "products", id));
+      console.log(`Deleted product: ${id}`);
+      navigate('/products');
+    }
+    catch (error) {
+      console.log(`Error: ${error}`);
+    }
   }
 
   return <>
     {product ? <>
       <h3>Product ID: {product.id} <Link to={`/products/edit/${product.id}`}>
-      <FontAwesomeIcon icon={faEdit} />Edit</Link></h3>
+        <FontAwesomeIcon icon={faEdit} />Edit</Link></h3>
       <div>Name: {product.Name}</div>
       <div>Description: {product.Description}</div>
       <div>Price: {product.Price}</div>
 
       <div><button onClick={handleDelete}>
-      <FontAwesomeIcon icon={faTrash} /> Delete</button></div>
+        <FontAwesomeIcon icon={faTrash} /> Delete</button></div>
     </> : <div>
-    <FontAwesomeIcon icon={faSpinner} spin />Loading...</div>}
+      <FontAwesomeIcon icon={faSpinner} spin />Loading...</div>}
   </>;
 };
 

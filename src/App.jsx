@@ -8,6 +8,7 @@ import ProductDetail from './components/ProductDetail';
 import Header from './components/Header';
 import CreateEditProduct from './components/CreateEditProduct';
 import Login from './components/Login';
+import Register from './components/Registration';
 import Wishlist from './components/Wishlist';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/products/new" element={<AuthenticatedRoute component={CreateEditProduct} />} />

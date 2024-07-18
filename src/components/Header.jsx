@@ -3,18 +3,20 @@ import { useUser } from '../contexts/hooks';
 import { auth } from '../firebaseConfig';
 import { signOut } from '@firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSignInAlt, faBars, faEnvelope, faHeart,faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSignInAlt, faBars, faEnvelope, faHeart, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
   const currentUser = useUser();
 
-  const handleLogout = (e) => {
-    
+  const handleLogout = async (e) => {
     e.preventDefault();
 
-    signOut(auth)
-      .then(() => { console.log('Sign out successfully') })
-      .catch((error) => { console.error('Error signing out:', error); });
+    try {
+      await signOut(auth);
+      console.log("Signed out successfully");
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
   return (
@@ -23,11 +25,11 @@ function Header() {
         <ul className="nav-custom">
           <li className="nav-item">
             <Link to="/" className="nav-link">
-            <FontAwesomeIcon icon={faHome} /> Home</Link>
+              <FontAwesomeIcon icon={faHome} /> Home</Link>
           </li>
           <li className="nav-item">
             <Link to="/products" className="nav-link">
-            <FontAwesomeIcon icon={faBars} />Products</Link>
+              <FontAwesomeIcon icon={faBars} />Products</Link>
           </li>
           <li className="nav-item">
             {currentUser && <Link to="#" className="nav-link" onClick={handleLogout}>Logout</Link>}
@@ -36,15 +38,15 @@ function Header() {
           </li>
           <li className="nav-item">
             <Link to="/register" className="nav-link">
-            <FontAwesomeIcon icon={faUserPlus} /> Register</Link>
+              <FontAwesomeIcon icon={faUserPlus} /> Register</Link>
           </li>
           <li className="nav-item">
             <Link to="/contact" className="nav-link">
-            <FontAwesomeIcon icon={faEnvelope} /> Contact</Link>
+              <FontAwesomeIcon icon={faEnvelope} /> Contact</Link>
           </li>
           <li className="nav-item">
             <Link to="/wishlist" className="nav-link">
-            <FontAwesomeIcon icon={faHeart} />Wishlist</Link>
+              <FontAwesomeIcon icon={faHeart} />Wishlist</Link>
           </li>
         </ul>
       </nav>

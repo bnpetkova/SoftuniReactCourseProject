@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const db = getFirestore(app);
 
-function CreateProduct() {
+function CreateEditProduct() {
     const { id } = useParams();
     const [product, setProduct] = useState({ Name: "", Description: "", Price: 0 });
     const [saving, setSaving] = useState(false);
@@ -14,18 +14,24 @@ function CreateProduct() {
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (id) {
-            setSaving(true);
-            const docRef = doc(db, "products", id);
-            getDoc(docRef).then((docSnap) => {
+        async function fetchData() {
+            if (!id) return;
+
+            try {
+                const docRef = doc(db, "products", id);
+                const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     setProduct(docSnap.data());
                 } else {
                     console.log("No such document!");
                 }
-                setSaving(false);
-            });
+            }
+            catch (error) {
+                console.log("Error getting document:", error);
+            }
         }
+
+        fetchData();
     }, [id]);
 
 
@@ -79,4 +85,4 @@ function CreateProduct() {
     );
 }
 
-export default CreateProduct;
+export default CreateEditProduct;

@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Register from './components/Registration';
 import Wishlist from './components/Wishlist';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
+import MyProfile from './components/MyProfile';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/products/new" element={<AuthenticatedRoute component={CreateEditProduct} />} />
         <Route path="/products/edit/:id" element={<AuthenticatedRoute component={CreateEditProduct} />} />
         <Route path="/wishlist" element={<Wishlist />} />

@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
-import { useUser } from '../contexts/hooks';
+import { useContext } from 'react';
+import UserContext from '../contexts/UserContext'; // Adjust the path as necessary
 
 const AuthenticatedRoute = ({ component: Component }) => {
-    const user = useUser();
+    const { user } = useContext(UserContext);
 
-    return user ? <Component /> : <Navigate to="/login" state={{ message: "This section is only accessible to registered users. Please register or sign in if you already have an account." }} />;
+    return user ? <Component /> : <Navigate to="/login" state={{ message: "Please sign in to access this page." }} />;
 };
 
 AuthenticatedRoute.propTypes = {
-    message: PropTypes.string, // Add the 'message' prop validation
     component: PropTypes.elementType.isRequired,
 };
 

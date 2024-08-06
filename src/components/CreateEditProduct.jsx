@@ -47,10 +47,8 @@ function CreateEditProduct() {
             }
 
             if (id) {
-                // Update existing product
                 await setDoc(doc(db, "products", id), { ...product });
             } else {
-                // Create new product
                 await addDoc(collection(db, "products"), { CreatedBy: currentUser.uid, ...product });
             }
             
